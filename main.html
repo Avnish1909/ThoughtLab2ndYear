@@ -1,0 +1,908 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thought Lab | Welcome to Our 3rd Year Induction!</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #8b5cf6;
+            --primary-light: #a78bfa;
+            --primary-dark: #7c3aed;
+            --secondary: #10b981;
+            --accent: #ec4899;
+            --dark-1: #0f172a;
+            --dark-2: #1e293b;
+            --dark-3: #334155;
+            --light: #f1f5f9;
+            --gray: #94a3b8;
+            --warm: #fef3c7;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Poppins", -apple-system, BlinkMacSystemFont, sans-serif;
+        }
+
+        body {
+            background-color: var(--dark-1);
+            color: var(--light);
+            line-height: 1.7;
+            overflow-x: hidden;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        .glow {
+            text-shadow: 0 0 10px rgba(139, 92, 246, 0.7);
+        }
+
+        /* Header Styles */
+        header {
+            background: linear-gradient(135deg, var(--dark-2), var(--dark-1));
+            padding: 4rem 1rem 6rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(
+                    circle at 20% 30%,
+                    rgba(139, 92, 246, 0.15) 0%,
+                    transparent 40%
+                ),
+                radial-gradient(
+                    circle at 80% 70%,
+                    rgba(16, 185, 129, 0.15) 0%,
+                    transparent 40%
+                );
+            z-index: 0;
+        }
+
+        .header-content {
+            position: relative;
+            z-index: 2;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .header-content h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            font-weight: 700;
+            background: linear-gradient(to right, var(--primary-light), var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: fadeInDown 1s ease;
+        }
+
+        .header-content p {
+            font-size: 1.1rem;
+            color: var(--gray);
+            margin-bottom: 2rem;
+            animation: fadeInUp 1s ease 0.3s forwards;
+            opacity: 0;
+        }
+
+        .welcome-note {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border-radius: 16px;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            text-align: center;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .welcome-note p {
+            font-size: 1rem;
+            line-height: 1.8;
+            color: var(--warm);
+            margin-bottom: 0;
+        }
+
+        .event-highlight {
+            background: rgba(30, 41, 59, 0.7);
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--dark-3);
+            border-radius: 12px;
+            padding: 1.2rem;
+            display: inline-block;
+            margin-top: 1rem;
+            animation: fadeIn 1s ease 0.6s forwards;
+            opacity: 0;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+            width: 100%;
+            max-width: 400px;
+        }
+
+        .event-highlight h2 {
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+            color: var(--light);
+        }
+
+        .event-highlight p {
+            color: var(--gray);
+            margin-bottom: 0.5rem;
+            font-size: 0.9rem;
+        }
+
+        /* Main Content */
+        .main-content {
+            position: relative;
+            z-index: 3;
+            margin-top: -3rem;
+            padding-bottom: 3rem;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+
+        /* Section Styling */
+        .section {
+            background: var(--dark-2);
+            border-radius: 16px;
+            padding: 2rem 1.5rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            border: 1px solid var(--dark-3);
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease;
+        }
+
+        .section.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .section h2 {
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+            color: var(--light);
+            position: relative;
+            display: inline-block;
+        }
+
+        .section h2::after {
+            content: "";
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 50px;
+            height: 4px;
+            background: linear-gradient(to right, var(--primary), var(--accent));
+            border-radius: 2px;
+        }
+
+        .section-description {
+            color: var(--gray);
+            margin-bottom: 1.5rem;
+            font-size: 1rem;
+        }
+
+        /* Team Cards */
+        .team-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+
+        .team-card {
+            background: var(--dark-3);
+            border-radius: 12px;
+            padding: 1.5rem;
+            transition: all 0.3s ease;
+            border-left: 4px solid var(--primary);
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .team-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+            border-left-color: var(--secondary);
+        }
+
+        .team-card h3 {
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            color: var(--light);
+            display: flex;
+            align-items: center;
+        }
+
+        .team-card h3 i {
+            margin-right: 10px;
+            color: var(--primary);
+            font-size: 1.2rem;
+        }
+
+        .team-card ul {
+            list-style-type: none;
+        }
+
+        .team-card ul li {
+            padding: 0.5rem 0;
+            position: relative;
+            padding-left: 1.8rem;
+            color: var(--gray);
+            border-bottom: 1px dashed rgba(148, 163, 184, 0.2);
+            font-size: 0.95rem;
+        }
+
+        .team-card ul li::before {
+            content: "→";
+            position: absolute;
+            left: 0;
+            color: var(--secondary);
+            font-weight: bold;
+        }
+
+        /* Club Section */
+        .club-section {
+            background: linear-gradient(135deg, var(--dark-2), var(--dark-1));
+            padding: 3rem 1rem;
+            margin: 3rem 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .club-section::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(
+                    circle at 10% 20%,
+                    rgba(139, 92, 246, 0.1) 0%,
+                    transparent 30%
+                ),
+                radial-gradient(
+                    circle at 90% 80%,
+                    rgba(16, 185, 129, 0.1) 0%,
+                    transparent 30%
+                );
+            z-index: 1;
+        }
+
+        .club-content {
+            position: relative;
+            z-index: 2;
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .meditation-icon {
+            font-size: 2.5rem;
+            color: var(--secondary);
+            margin-bottom: 1.5rem;
+            display: inline-block;
+            animation: float 4s ease-in-out infinite;
+        }
+
+        .club-content h2 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(to right, var(--secondary), var(--primary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .club-content p {
+            color: var(--gray);
+            margin-bottom: 1rem;
+            font-size: 1rem;
+        }
+
+        /* Buttons */
+        .btn-group {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            justify-content: center;
+            margin-top: 1.5rem;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0.8rem 1.5rem;
+            border-radius: 8px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            font-size: 0.95rem;
+        }
+
+        .btn-primary {
+            background: linear-gradient(
+                to right,
+                var(--primary),
+                var(--primary-dark)
+            );
+            color: white;
+            box-shadow: 0 4px 15px rgba(139, 92, 246, 0.3);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(139, 92, 246, 0.4);
+        }
+
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(5px);
+            color: var(--light);
+            border: 1px solid var(--dark-3);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-3px);
+        }
+
+        .btn-warm {
+            background: linear-gradient(to right, #f59e0b, #d97706);
+            color: white;
+            box-shadow: 0 4px 15px rgba(245, 158, 11, 0.3);
+        }
+
+        .btn-warm:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(245, 158, 11, 0.4);
+        }
+
+        /* FAQ Section */
+        .faq-container {
+            margin-top: 1.5rem;
+        }
+
+        .faq-item {
+            background: var(--dark-3);
+            border-radius: 8px;
+            margin-bottom: 1rem;
+            overflow: hidden;
+        }
+
+        .faq-question {
+            padding: 1.2rem;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 500;
+            font-size: 1rem;
+        }
+
+        .faq-answer {
+            padding: 0 1.2rem 1.2rem;
+            color: var(--gray);
+            line-height: 1.6;
+            font-size: 0.95rem;
+            display: none;
+        }
+
+        .faq-answer.active {
+            display: block;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--dark-1);
+            padding: 3rem 1rem 2rem;
+            border-top: 1px solid var(--dark-3);
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .footer-logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            background: linear-gradient(to right, var(--primary), var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            display: inline-block;
+        }
+
+        .footer-description {
+            color: var(--gray);
+            max-width: 600px;
+            margin: 0 auto 1.5rem;
+            font-size: 0.95rem;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin: 1.5rem 0;
+        }
+
+        .social-links a {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--dark-2);
+            color: var(--light);
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            border: 1px solid var(--dark-3);
+        }
+
+        .social-links a:hover {
+            background: linear-gradient(to right, var(--primary), var(--accent));
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(139, 92, 246, 0.3);
+            border-color: transparent;
+        }
+
+        .copyright {
+            color: var(--dark-3);
+            font-size: 0.85rem;
+            margin-top: 1.5rem;
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes float {
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-8px);
+            }
+        }
+
+        /* Desktop Styles */
+        @media (min-width: 768px) {
+            header {
+                padding: 6rem 2rem 8rem;
+            }
+            
+            .header-content h1 {
+                font-size: 3.5rem;
+            }
+            
+            .header-content p {
+                font-size: 1.25rem;
+            }
+            
+            .welcome-note {
+                padding: 2rem;
+            }
+            
+            .welcome-note p {
+                font-size: 1.1rem;
+            }
+            
+            .event-highlight {
+                padding: 1.5rem 2rem;
+                max-width: 500px;
+            }
+            
+            .event-highlight h2 {
+                font-size: 1.5rem;
+            }
+            
+            .event-highlight p {
+                font-size: 1rem;
+            }
+            
+            .container {
+                padding: 0 2rem;
+            }
+            
+            .section {
+                padding: 3rem;
+            }
+            
+            .section h2 {
+                font-size: 2rem;
+            }
+            
+            .section h2::after {
+                width: 60px;
+            }
+            
+            .team-grid {
+                grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+                gap: 2rem;
+            }
+            
+            .team-card {
+                padding: 2rem;
+            }
+            
+            .team-card h3 {
+                font-size: 1.5rem;
+            }
+            
+            .btn-group {
+                flex-direction: row;
+            }
+            
+            .club-section {
+                padding: 5rem 2rem;
+            }
+            
+            .meditation-icon {
+                font-size: 3.5rem;
+            }
+            
+            .club-content h2 {
+                font-size: 2.5rem;
+            }
+            
+            footer {
+                padding: 4rem 2rem 2rem;
+            }
+            
+            .footer-logo {
+                font-size: 1.8rem;
+            }
+        }
+
+        @media (min-width: 1024px) {
+            .btn-group {
+                flex-direction: row;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-bg"></div>
+        <div class="header-content">
+            <h1>Welcome to Thought Lab!</h1>
+            <p>
+                Join our friendly community where technical skills meet mindfulness practices
+            </p>
+            
+            <div class="welcome-note">
+                <p>Hey there! We're so excited to meet you. Whether you're a coding whiz, design enthusiast, or just curious to learn, there's a place for you here. No pressure, just good vibes and growth! 🌱</p>
+            </div>
+            
+            <div class="event-highlight">
+                <h2><i class="fas fa-calendar-alt"></i> Induction Day: 8-9 September, 2025</h2>
+                <p><i class="fas fa-clock"></i> 5:00 PM - 7:00 PM</p>
+                <p><i class="fas fa-map-marker-alt"></i> Wisdom Hall, Thought Lab</p>
+            </div>
+        </div>
+    </header>
+
+    <div class="container main-content">
+        <section id="teams" class="section">
+            <h2><i class="fas fa-users"></i> Teams You Can Join</h2>
+            <p class="section-description">
+                No experience required! We'll help you learn and grow. Just bring your curiosity and enthusiasm.
+            </p>
+
+            <div class="team-grid">
+                <div class="team-card">
+                    <h3><i class="fas fa-code"></i> Web Development</h3>
+                    <ul>
+                        <li>Beginner-friendly workshops and guidance</li>
+                        <li>Work on fun, real-world projects</li>
+                        <li>Learn modern frameworks together</li>
+                        <li>Collaborate on our club website</li>
+                        <li>Build your portfolio with our support</li>
+                    </ul>
+                </div>
+
+                <div class="team-card">
+                    <h3><i class="fas fa-paint-brush"></i> Graphic Design</h3>
+                    <ul>
+                        <li>Create eye-catching visuals for events</li>
+                        <li>Learn design principles in a supportive environment</li>
+                        <li>Work with UI/UX concepts</li>
+                        <li>No previous experience needed</li>
+                        <li>Collaborate on club branding and marketing</li>
+                    </ul>
+                </div>
+
+                <div class="team-card">
+                    <h3><i class="fas fa-film"></i> Video Editing</h3>
+                    <ul>
+                        <li>Learn editing techniques from basics to advanced</li>
+                        <li>Create content for our social media</li>
+                        <li>Document club activities and events</li>
+                        <li>All skill levels welcome</li>
+                        <li>Work with supportive peers</li>
+                    </ul>
+                </div>
+
+                <div class="team-card">
+                    <h3><i class="fas fa-om"></i> Meditation Unit</h3>
+                    <ul>
+                        <li>Lead guided meditation sessions</li>
+                        <li>Help others discover mindfulness practices</li>
+                        <li>Create a peaceful environment for the community</li>
+                        <li>Learn about stress management techniques</li>
+                        <li>Foster mental well-being and inner growth</li>
+                    </ul>
+                </div>
+
+                <div class="team-card">
+                    <h3><i class="fas fa-microphone-alt"></i> Anchoring Team</h3>
+                    <ul>
+                        <li>Host club events and workshops</li>
+                        <li>Develop public speaking skills</li>
+                        <li>Guide discussions and Q&A sessions</li>
+                        <li>Welcome new members with warmth</li>
+                        <li>Build confidence in communication</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section id="requirements" class="section">
+            <h2><i class="fas fa-clipboard-list"></i> What to Bring</h2>
+            <p class="section-description">Don't worry if you don't have everything - just bring yourself and we'll help with the rest!</p>
+
+            <div class="team-grid">
+                <div class="team-card">
+                    <h3><i class="fas fa-laptop-code"></i> For Web Devs</h3>
+                    <ul>
+                        <li>Your laptop if you have one (we have some to share)</li>
+                        <li>Any projects you'd like to show (optional)</li>
+                        <li>Your curiosity and questions</li>
+                        <li>No pressure to be an expert!</li>
+                    </ul>
+                </div>
+
+                <div class="team-card">
+                    <h3><i class="fas fa-palette"></i> For Designers</h3>
+                    <ul>
+                        <li>Any design work you're proud of (completely optional)</li>
+                        <li>Your creative ideas</li>
+                        <li>Tablet/laptop if you have one (not required)</li>
+                        <li>Willingness to learn and experiment</li>
+                    </ul>
+                </div>
+
+                <div class="team-card">
+                    <h3><i class="fas fa-video"></i> For Editors</h3>
+                    <ul>
+                        <li>Any videos you've edited (if you want to share)</li>
+                        <li>Ideas for projects you'd like to work on</li>
+                        <li>Your enthusiasm for storytelling</li>
+                        <li>We'll help with the technical stuff!</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+        
+        <section id="faq" class="section">
+            <h2><i class="fas fa-question-circle"></i> Frequently Asked Questions</h2>
+            <p class="section-description">We know joining something new can feel intimidating, so here are answers to common questions:</p>
+            
+            <div class="faq-container">
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>Do I need prior experience to join?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Not at all! We welcome complete beginners. Our community is all about learning and growing together. We'll provide workshops and mentorship to help you develop skills.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>What if I'm not sure which team to join?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>No problem! Many members participate in multiple teams. Come to the induction, talk to current members, and you can try different activities before deciding.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>How much time commitment is expected?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>We understand you have academic commitments. You can participate as much or as little as you want. We have weekly meetings but there's no mandatory attendance.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>What's this about mindfulness and meditation?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>We believe in nurturing both technical skills and mental well-being. We offer optional meditation sessions and mental health resources alongside our tech activities.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <section class="club-section">
+        <div class="club-content">
+            <div class="meditation-icon">
+                <i class="fas fa-heart"></i>
+            </div>
+            <h2>Our Supportive Community</h2>
+            <p>
+                Thought Lab isn't just about skills - it's about people. We combine technical learning with mindfulness practices to create a supportive environment where everyone can thrive.
+            </p>
+
+            <div class="team-grid" style="margin: 2rem auto; max-width: 800px">
+                <div class="team-card">
+                    <h3><i class="fas fa-hands-helping"></i> Peer Support</h3>
+                    <ul>
+                        <li>Friendly mentors to guide you</li>
+                        <li>Collaborative, not competitive environment</li>
+                        <li>Learn at your own pace</li>
+                        <li>Ask questions without judgment</li>
+                    </ul>
+                </div>
+
+                <div class="team-card">
+                    <h3><i class="fas fa-balance-scale"></i> Mind-Balance</h3>
+                    <ul>
+                        <li>Weekly guided meditation</li>
+                        <li>Stress management workshops</li>
+                        <li>Mental health resources</li>
+                        <li>Supportive community network</li>
+                    </ul>
+                </div>
+            </div>
+
+            <p style="margin-top: 2rem">
+                We meet every Thursday 4-6pm for workshops and optional mindfulness sessions. Come as you are - all students are welcome regardless of experience level.
+            </p>
+
+            <div class="btn-group">
+                <a href="https://forms.gle/VEa2i4ewzxBLdzb47" class="btn btn-primary">
+                    <i class="fas fa-smile" style="margin-right: 8px"></i> Register Now
+                </a>
+                <a href="#faq" class="btn btn-secondary">
+                    <i class="fas fa-question-circle" style="margin-right: 8px"></i> Read FAQs First
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-logo">Thought Lab</div>
+            <p class="footer-description">
+                A welcoming community bridging technology and mindfulness for holistic growth
+            </p>
+            
+            <div class="btn-group">
+                <a href="mailto:12213075@nitkkr.ac.in" class="btn btn-warm">
+                    <i class="fas fa-envelope" style="margin-right: 8px"></i> Ask Us Anything
+                </a>
+            </div>
+
+            <div class="social-links">
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="https://www.linkedin.com/in/ashish-saini-a641902b3/"><i class="fab fa-linkedin-in"></i></a>
+                <a href="https://github.com/ASHISH-SAINI78021"><i class="fab fa-github"></i></a>
+                <a href="mailto:12213075@nitkkr.ac.in"><i class="fas fa-envelope"></i></a>
+            </div>
+
+            <p class="copyright">© 2025 Thought Lab Club. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Animate sections when they come into view
+        document.addEventListener("DOMContentLoaded", function () {
+            const sections = document.querySelectorAll(".section");
+            const faqQuestions = document.querySelectorAll('.faq-question');
+
+            const animateSections = () => {
+                sections.forEach((section, index) => {
+                    const sectionTop = section.getBoundingClientRect().top;
+                    const windowHeight = window.innerHeight;
+
+                    if (sectionTop < windowHeight - 100) {
+                        section.classList.add("visible");
+                    }
+                });
+            };
+
+            // Run once on load
+            animateSections();
+
+            // Run on scroll
+            window.addEventListener("scroll", animateSections);
+
+            // Smooth scrolling for anchor links
+            document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+                anchor.addEventListener("click", function (e) {
+                    e.preventDefault();
+                    const target = document.querySelector(this.getAttribute("href"));
+                    if (target) {
+                        window.scrollTo({
+                            top: target.offsetTop - 80,
+                            behavior: "smooth",
+                        });
+                    }
+                });
+            });
+            
+            // FAQ toggle functionality
+            faqQuestions.forEach(question => {
+                question.addEventListener('click', () => {
+                    const answer = question.nextElementSibling;
+                    const icon = question.querySelector('i');
+                    
+                    // Toggle active class
+                    answer.classList.toggle('active');
+                    
+                    // Toggle icon
+                    icon.classList.toggle('fa-chevron-down');
+                    icon.classList.toggle('fa-chevron-up');
+                });
+            });
+        });
+    </script>
+</body>
+</html>
